@@ -14,7 +14,7 @@ var bodyParser          = require( 'body-parser' )
 var port                = process.env.PORT || 3000
 var DB                  = process.env.DATABASE_URL || 'mongodb://localhost:27017/fogo'
 var Conversation        = require( './models/Conversation.js' )
-var conversationsRouter = require( './routes/conversationRoutes.js' )
+var conversationsRouter = require( './config/routes/conversationRoutes.js' )
 
 
 //Connect to database
