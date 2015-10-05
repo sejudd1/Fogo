@@ -16,12 +16,12 @@ var port                = process.env.PORT || 3000
 var DB                  = process.env.DATABASE_URL || 'mongodb://localhost:27017/fogo'
 var Conversation        = require( './models/Conversation.js' )
 var conversationsRouter = require( './config/routes/conversationRoutes.js' )
-<<<<<<< HEAD
 var passport       		= require( "passport" )
 var expressSession 		= require( "express-session" )
 var cookieParser   		= require( "cookie-parser" )
-=======
->>>>>>> 37a189dbe8406d99d96330d4c4afeec9d6e938a5
+var passport       		= require( "passport" )
+var expressSession 		= require( "express-session" )
+var cookieParser   		= require( "cookie-parser" )
 
 
 //Connect to database
