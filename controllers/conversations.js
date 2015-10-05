@@ -23,7 +23,7 @@ function create( req, res ) {
 	console.log( "It's in here")
 	var conversation = new Conversation()
 	//Setting conversation properties
-	console.log( conversation )
+	console.log( req.body )
 	conversation.owner = req.body.owner
 	conversation.topics = req.body.topics
 	conversation.isLive = true
