@@ -7,15 +7,26 @@ function c( word ) {
 //===================
 //DECLARING VARIABLES
 //===================
-var express  = require( 'express' )
-var app      = express()
-var mongoose = require( 'mongoose' )
-var port     = process.env.PORT || 3000
-var DB       = process.env.DATABASE_URL || 'mongodb://localhost:27017/fogo'
-var Conversation = require( './models/conversation.js' )
+var express             = require( 'express' )
+var app                 = express()
+var mongoose            = require( 'mongoose' )
+var bodyParser          = require( 'body-parser' )
+var port                = process.env.PORT || 3000
+var DB                  = process.env.DATABASE_URL || 'mongodb://localhost:27017/fogo'
+var Conversation        = require( './models/Conversation.js' )
+var conversationsRouter = require( './routes/conversationRoutes.js' )
+
 
 //Connect to database
 mongoose.connect( DB )
+
+//===================
+//MIDDLEWARE
+//===================
+app.use( bodyParser.urlencoded( { extended: true } ) )
+app.use( bodyParser.json() ) 
+
+
 
 //===================
 //ROUTES
@@ -33,6 +44,8 @@ app.get( '/', function( req, res ) {
 		}
 	} )	
 } )
+
+app.use( '/api', conversationsRouter )
 
 
 //===============
