@@ -1,0 +1,26 @@
+{
+  "name": "fogo_app",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/gpynes/Fogo.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/gpynes/Fogo/issues"
+  },
+  "homepage": "https://github.com/gpynes/Fogo#readme",
+  "dependencies": {
+    "express": "^4.13.3",
+    "mongoose": "^4.1.9",
+    "passport": "^0.3.0",
+    "passport-facebook": "^2.0.0",
+    "passport-oauth": "^1.0.0"
+  }
+}
