@@ -12,8 +12,12 @@ var conversationsController = require( '../../controllers/conversations.js' )
 apiRouter.route( '/conversations' )
 	.get( conversationsController.index )
 	.post( conversationsController.create )
+
+apiRouter.route( '/conversations/:convo_id' )
+	.get( conversationsController.show )
+	.patch( conversationsController.update )
+	.delete( conversationsController.destroy )	
 	
 	
 	
-	
-	module.exports = apiRouter
+module.exports = apiRouter
