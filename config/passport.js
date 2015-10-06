@@ -127,6 +127,7 @@ module.exports = function( passport ) {
         clientID        : process.env.FACEBOOK_API_KEY,
         clientSecret    : process.env.FACEBOOK_API_SECRET,
         callbackURL     : 'http://localhost:3000/auth/facebook/callback',
+        passReqToCallback : true,
         enableProof     : true,
         profileFields   : [ 'id', 'name', 'email', 'picture' ]
     }, function( access_token, refresh_token, profile, done ) {
