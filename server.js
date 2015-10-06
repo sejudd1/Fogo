@@ -25,15 +25,15 @@ var cookieParser   		= require( 'cookie-parser' )
 mongoose.connect( DB )
 
 //express Session and Passport Session
-app.use(expressSession({
+app.use( expressSession( {
   secret: 'mySecretKey',
   resave: true,
   saveUninitialized: true 
-})
+} )
 )
 
-app.use(passport.initialize());
-app.use(passport.session());
+app.use( passport.initialize() );
+app.use( passport.session() );
 
 
 
@@ -56,18 +56,18 @@ app.get( '/auth/facebook', passport.authenticate( 'facebook', { scope: 'email' }
 
 //Route handler for facebook callback strategy
 app.get( '/auth/facebook/callback', 
-  //tell passport what to do on success and failure
+  //Tell passport what to do on success and failure
   passport.authenticate( 'facebook', {
     succesRedirect: '/',
     failureRedirect: '/'
-  })
+  } )
 )
 
 app.get( '/logout', function ( req, res ) {
   req.logout()
-  res.redirect('/')
+  res.redirect( '/' )
 
-}) 
+} ) 
 
 
 
