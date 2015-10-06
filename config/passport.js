@@ -4,24 +4,27 @@
 var User = require( '../models/User' )
 	FacebookStrategy = require( 'passport-facebook' ).Strategy
 
-module.exports = function( passport ){
+module.exports = function( passport ) {
 	//Get user id to store for session
-	passport.serializeUser( function( user, done ){
+	passport.serializeUser( function( user, done ) {
 		done( null, user._id )
-	})
+        
+	} )
+
 	console.log( module.exports )
 	//Grab the user every time we want the whole object in passport
-	passport.deserializeUser( function( id, done ){
-		User.findById( id, function( err, user ){
+	passport.deserializeUser( function( id, done ) {
+		User.findById( id, function( err, user ) {
 			done( err, user )
-		})
-	})
+		} )
+
+	} )
 
 //============
 //LOCAL LOGIN
 //============
     
-    passport.use( 'local-login', new LocalStrategy ({
+    passport.use( 'local-login', new LocalStrategy ( {
         // By default, local strategy uses username and password, we will override with email
         usernameField : 'email',
         passwordField : 'password',
@@ -39,18 +42,19 @@ module.exports = function( passport ){
 
                 // If no user is found, return the message
                 if ( !user )
-                    return done(null, false, req.flash( 'loginMessage', 'No user found.' ))
+                    return done( null, false, req.flash( 'loginMessage', 'No user found.' ) )
 
-                if ( !user.validPassword( password ))
-                    return done(null, false, req.flash( 'loginMessage', 'Oops! Wrong password.' ))
+                if ( !user.validPassword( password ) )
+                    return done( null, false, req.flash( 'loginMessage', 'Oops! Wrong password.' ) )
 
                 // All is well, return user
                 else
                     return done( null, user )
-            })
-        })
+            } )
 
-    }))
+        } )
+
+    } ) )
 
     // ==============
     // LOCAL SIGNUP 
@@ -88,7 +92,8 @@ module.exports = function( passport ){
                         if ( err )
                             throw err
                         return done( null, user )
-                    })
+                    } )
+
                 } 
                 //We're not logged in, so we'll make a brand new user.
                 else {
@@ -103,13 +108,15 @@ module.exports = function( passport ){
                             throw err
 
                         return done( null, newUser )
-                    })
+                    } )
+
                 }
 
-            })
-        })
+            } )
 
-    }))
+        } )
+
+    } ) )
 
 
 //===========
@@ -147,9 +154,13 @@ module.exports = function( passport ){
                                 throw err
                         }
                         return done( null, newUser )
-                    })
+                    } )
                 }
-            })
-        })
-    }))
+
+            } )
+
+        } )
+
+    } ) )
+
 }

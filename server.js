@@ -25,11 +25,11 @@ var cookieParser   		= require( 'cookie-parser' )
 mongoose.connect( DB )
 
 //express Session and Passport Session
-app.use(expressSession({
+app.use( expressSession( {
   secret: 'mySecretKey',
   resave: true,
   saveUninitialized: true 
-})
+} )
 )
 
 app.use( passport.initialize() );
@@ -60,14 +60,14 @@ app.get( '/auth/facebook/callback',
   passport.authenticate( 'facebook', {
     succesRedirect: '/',
     failureRedirect: '/'
-  })
+  } )
 )
 
 app.get( '/logout', function ( req, res ) {
   req.logout()
   res.redirect( '/' )
 
-}) 
+} ) 
 
 
 
