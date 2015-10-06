@@ -58,7 +58,7 @@ app.get( '/auth/facebook', passport.authenticate( 'facebook', { scope: 'email' }
 app.get( '/auth/facebook/callback', 
   //Tell passport what to do on success and failure
   passport.authenticate( 'facebook', {
-    succesRedirect: '/',
+    successRedirect: '/',
     failureRedirect: '/'
   } )
 )
