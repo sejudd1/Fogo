@@ -24,14 +24,14 @@ var userSchema = mongoose.Schema({
 
 	}
 
-})
-//Validates User Password
-User.methods.validatePassword = function ( password ) {
-  return bcrypt.compareSync( password, this.local.password )
+} )
+//Adds Hash to password
+userSchema.methods.generateHash = function( password ) {
+    return bcrypt.hashSync( password, bcrypt.genSaltSync(8), null )
 }
-//Adds hash to password 
-User.methods.encrypt = function( password ) {
-  return bcrypt.hashSync( password, bcrypt.genSaltSync( 8 ), null )
+//Validating password
+userSchema.methods.validPassword = function( password ) {
+    return bcrypt.compareSync( password, this.local.password )
 }
 //Exports Model to the app
-module.exports = mongoose.model( 'User', User )
+module.exports = mongoose.model( 'User', userSchema )

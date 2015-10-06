@@ -1,8 +1,9 @@
 //===========================
 //This is our passport module
 //===========================
-var User = require( '../models/User' )
-	FacebookStrategy = require( 'passport-facebook' ).Strategy
+var User                = require( '../models/User' )
+	FacebookStrategy    = require( 'passport-facebook' ).Strategy
+    LocalStrategy       = require( 'passport-local' ).Strategy
 
 module.exports = function( passport ) {
 	//Get user id to store for session
