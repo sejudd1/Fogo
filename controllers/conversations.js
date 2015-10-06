@@ -11,42 +11,42 @@ var Conversation = require('../models/Conversation.js')
 function index ( req, res ) {
   Conversation.find(function ( error, conversations ) {
     if ( error ) {
-      res.json(error)
+      res.json( error )
     } else {
-      res.json(conversations)
+      res.json( conversations )
     }
-  })
+  } )
 }
 
 // make a new conversation
 function create ( req, res ) {
-  console.log("It's in here")
+  console.log( "It's in here" )
   var conversation = new Conversation()
   // Setting conversation properties
-  console.log(req.body)
-  conversation.owner = req.body.owner
+  console.log( req.body )
+  conversation.owner  = req.body.owner
   conversation.topics = req.body.topics
   conversation.isLive = true
 
   // check if conversation saved
-  conversation.save(function ( error ) {
+  conversation.save( function ( error ) {
     if ( error ) {
-      res.json(error)
+      res.json( error )
     } else {
-      res.json(conversation)
+      res.json( conversation )
     }
-  })
+  } )
 }
 
 // show a specific conversation
 function show ( req, res ) {
   Conversation.findOne(req.params.convo_id, function ( error, convo ) {
     if ( error ) {
-      res.json(error)
+      res.json( error )
     } else {
-      res.json(convo)
+      res.json( convo )
     }
-  })
+  } )
 }
 
 // update attributes of selected conversation
@@ -56,31 +56,31 @@ function update ( req, res ) {
       res.json(error)
     } else {
       // change attributes
-      convo.owner = req.body.owner || convo.owner
-      convo.group = req.body.group || convo.group
-      convo.topics = req.body.topics || convo.topics
-      convo.location = req.body.location || convo.location
+      convo.owner    = req.body.owner       || convo.owner
+      convo.group    = req.body.group       || convo.group
+      convo.topics   = req.body.topics      || convo.topics
+      convo.location = req.body.location    || convo.location
       console.log(convo.owner)
       convo.save(function ( error ) {
         if ( error ) {
-          res.json(error)
+          res.json( error )
         } else {
-          res.json(convo)
+          res.json( convo )
         }
-      })
+      } )
     }
-  })
+  } )
 }
 
 // remove a conversation from database
 function destroy ( req, res ) {
   Conversation.findById(req.params.convo_id, function ( error, convo ) {
     if ( error ) {
-      res.json(error)
+      res.json( error )
     } else {
-      res.json('Conversation deleted')
+      res.json( 'Conversation deleted' )
     }
-  })
+  } )
 }
 
 // =========
@@ -88,9 +88,9 @@ function destroy ( req, res ) {
 // ==========
 
 module.exports = {
-  index: index,
-  create: create,
-  show: show,
-  update: update,
-  destroy: destroy
+  index   : index,
+  create  : create,
+  show    : show,
+  update  : update,
+  destroy : destroy
 }

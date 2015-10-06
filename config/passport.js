@@ -124,12 +124,12 @@ module.exports = function( passport ) {
 //FACEBOOOK
 //===========
 	passport.use( 'facebook', new FacebookStrategy({
-        clientID        : process.env.FACEBOOK_API_KEY,
-        clientSecret    : process.env.FACEBOOK_API_SECRET,
-        callbackURL     : 'http://localhost:3000/auth/facebook/callback',
+        clientID          : process.env.FACEBOOK_API_KEY,
+        clientSecret      : process.env.FACEBOOK_API_SECRET,
+        callbackURL       : 'http://localhost:3000/auth/facebook/callback',
         passReqToCallback : true,
-        enableProof     : true,
-        profileFields   : [ 'id', 'name', 'email', 'picture' ]
+        enableProof       : true,
+        profileFields     : [ 'id', 'name', 'email', 'picture' ]
     }, function( access_token, refresh_token, profile, done ) {
 
     // Use this to see the information returned from Facebook

@@ -11,23 +11,23 @@ var bcrypt 			= require( 'bcrypt-nodejs' )
 //All user accounts setup within their own object. To link and unlink user accounts.
 var userSchema = mongoose.Schema({
 	local:{
-		email: String,
+		email:    String,
 		password: String,
 	},
 	
 	fb:{
-		id: String,
+		id:           String,
 		access_token: String,
-		firstName: String,
-		lastName: String,
-		email: String
+		firstName:    String,
+		lastName:     String,
+		email:        String
 
 	}
 
 } )
 //Adds Hash to password
 userSchema.methods.generateHash = function( password ) {
-    return bcrypt.hashSync( password, bcrypt.genSaltSync(8), null )
+    return bcrypt.hashSync( password, bcrypt.genSaltSync( 8 ), null )
 }
 //Validating password
 userSchema.methods.validPassword = function( password ) {
