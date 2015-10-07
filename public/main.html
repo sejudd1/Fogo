@@ -1,0 +1,28 @@
+<div class="clearfix">
+	<div class="panel panel-default" ng-show="authenticated">
+		<div class = "panel-heading">Start a conversation</div>
+		<div class="panel-body">
+			<form ng-show="authenticated" ng-Submit="conversation()">
+				<h4>{{ current_user }} says:</h4>
+				<input required type="text" class="form-control input-lg" placeholder="Your name" ng-model="newConversation.created_by" />
+				<br/>
+				<textarea required class="form-control input-lg" maxlength="200" rows="3" placeholder="Say something" ng-model="newConversation.text"></textarea>
+				<br/>
+				<input class="btn btn-block btn-success" type="submit" value="Fogo!" />
+			</form>
+		</div>
+	</div>
+	<div class="panel panel-default" id="conversation-stream">
+		<div class="panel-heading">Current Conversations</div>
+			<div class="conversation" ng-repeat="conversation in conversations | orderBy:'created_at':true" ng-class-odd="'odd'" ng-class-even="'even'">
+				<p>{{conversation.text}}</p>
+				<small>Conversationed by @{{conversation.created_by}}</small>
+				<small class="pull-right">{{conversation.created_at | date:"h:mma 'on' MMM d, y"}}</small>
+			</div>
+	</div>
+	<div class="panel panel-default">
+		<div id="map_canvas" ng-controller="mainController">
+	    	<ui-gmap-google-map center="map.center" zoom="map.zoom" options="options"></ui-gmap-google-map>
+		</div>
+	</div>
+
