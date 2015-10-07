@@ -1,7 +1,7 @@
 // ===================
 // DECLARING VARIABLES
 // ===================
-var Conversation = require('../models/Conversation.js')
+var Conversation = require('../models/conversation.js')
 
 // ==============
 // CRUD FUNCTIONS
