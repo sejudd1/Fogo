@@ -45,11 +45,11 @@ module.exports = function( passport ) {
                     var newUser = new User()
                     newUser.fb.id           = profile.id
                     newUser.fb.access_token = access_token
-                    //newUser.fb.firstName    = profile.name.givenName
-                    //newUser.fb.lastName     = profile.name.familyName
-                    //newUser.fb.email        = profile.emails[0].value
-                    //newUser.fb.photos		= "https://graph.facebook.com/" + profile.username + "/picture" + "&access_token=" + accessToken
-
+                    newUser.fb.firstName    = profile.name.givenName
+                    newUser.fb.lastName     = profile.name.familyName
+                    newUser.fb.email        = profile.emails[0].value
+                    newUser.fb.picture		= 'https://graph.facebook.com/' + profile.id + '/picture'
+                    console.log(newUser.fb.picture)
                     newUser.save(function( err , user ) {
                         if ( err ) {
                                 throw err
