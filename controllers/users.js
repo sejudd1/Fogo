@@ -24,7 +24,7 @@ var User = require( '../models/user.js' )
 		// make a single user -- create
 		var user = new User()
 
-		user.name = req.body.name
+		user.name     = req.body.name
 		user.username = req.body.username
 		user.password = req.body.password
 
