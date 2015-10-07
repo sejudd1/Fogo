@@ -33,5 +33,9 @@ userSchema.methods.generateHash = function( password ) {
 userSchema.methods.validPassword = function( password ) {
     return bcrypt.compareSync( password, this.local.password )
 }
+
+//Method to create conversation for user
+userSchema.methods.addConversation = function(){}
+
 //Exports Model to the app
 module.exports = mongoose.model( 'User', userSchema )

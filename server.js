@@ -82,10 +82,15 @@ app.get( '/', function( req, res ) {
 			res.json( 'Error ' + error )
 		} else {
 			c( 'this works' )
+			c( req.isAuthenticated )
 	res.json( conversations )
 
 		}
 	} )	
+} )
+
+app.get( '/map', function( req, res ) {
+	res.sendFile( __dirname + '/views/map.html' )	
 } )
 
 app.use( '/api', conversationsRouter )
