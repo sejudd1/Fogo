@@ -39,13 +39,9 @@ module.exports = function( passport ) {
            
             User.findOne( { 'fb.id' : profile.id }, function( err, user ) {
                 if ( err ) {
-                    
                     return done( err )
-                } else if ( user ) {
-                    passport.serializeUser( done( null, user ) )
-                  // return done( null, user ).serializeUser
-                } else {
-
+                } 
+                if (!user){  
                     var newUser = new User()
                     newUser.fb.id           = profile.id
                     newUser.fb.access_token = access_token
@@ -54,15 +50,16 @@ module.exports = function( passport ) {
                     //newUser.fb.email        = profile.emails[0].value
                     //newUser.fb.photos		= "https://graph.facebook.com/" + profile.username + "/picture" + "&access_token=" + accessToken
 
-                    newUser.save(function( err ) {
+                    newUser.save(function( err , user ) {
                         if ( err ) {
                                 throw err
                         }
-                        passport.serializeUser( done( null, user ) )
-                        // return done( null, newUser )
+                        return done( null, user )
                     } )
-                }
 
+                }
+                  return done( null, user )
+ 
             } )
 
         } )

@@ -51,6 +51,17 @@ app.use( logger( 'dev' ) )
 //===================
 // Setting up the Passport Strategies
 require( './config/passport' )( passport );
+
+//Define sessions
+app.use( function( req, res, next ) {
+	console.log( "Hello")
+	//console.log( req.user )
+	global.user = req.user
+	console.log( global.user )
+	next()
+} )
+
+
 //create facebook request
 app.get( '/auth/facebook', passport.authenticate( 'facebook', { scope: 'email' } ) )
 
