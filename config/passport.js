@@ -31,7 +31,6 @@ module.exports = function( passport ) {
         enableProof       : true,
         profileFields     : [ 'id', 'name', 'email', 'picture' ]
     }, function( access_token, refresh_token, profile, done ) {
-        console.log( process.env.FACEBOOK_API_KEY )
     // Use this to see the information returned from Facebook
 
         process.nextTick( function() {
@@ -41,14 +40,14 @@ module.exports = function( passport ) {
                     return done( err )
                 } 
                 if (!user){  
-                    var newUser = new User()
+                    var newUser             = new User()
                     newUser.fb.id           = profile.id
                     newUser.fb.access_token = access_token
-                    //newUser.fb.firstName    = profile.name.givenName
-                    //newUser.fb.lastName     = profile.name.familyName
-                    //newUser.fb.email        = profile.emails[0].value
-                    //newUser.fb.photos		= "https://graph.facebook.com/" + profile.username + "/picture" + "&access_token=" + accessToken
-
+                    newUser.fb.firstName    = profile.name.givenName
+                    newUser.fb.lastName     = profile.name.familyName
+                    newUser.fb.email        = profile.emails[0].value
+                    newUser.fb.picture		= 'https://graph.facebook.com/' + profile.id + '/picture'
+                    console.log( newUser.fb.picture )
                     newUser.save(function( err , user ) {
                         if ( err ) {
                                 throw err

@@ -1,11 +1,15 @@
 <div class="center-form panel">
     <div class="panel-body">
     <form class="form-auth" ng-submit="login()">
-    	<h2 class="text-center">Log In</h2>
+    	<h2 class="text-center">Log In Using Facebook</h2>
     	<p class="text-warning">{{error_message}}</p>
     	<input type="username" ng-model="user.username" placeholder="Username" class="form-control input-lg"><br>
     	<input type="password" ng-model="user.password" placeholder="Password" class="form-control input-lg"><br>
-    	<input type="submit" value="Log in" class="btn btn-primary" />
+    	<input type="submit" href="/auth/facebook" value="Log in" class="btn btn-primary" span class="fa fa-facebook"></span> 
+
+    	
+			
+			
     </form>
     </div>
 </div>
