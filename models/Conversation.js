@@ -1,6 +1,7 @@
 //===================
 //DECLARING VARIABLES
 //===================
+
 var mongoose = require( 'mongoose' )
 
 //===============
