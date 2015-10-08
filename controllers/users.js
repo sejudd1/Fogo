@@ -66,7 +66,7 @@ var User = require( '../models/user.js' )
 
 	function destroy( req, res ) {
 		// delete a single user -- destroy
-		User.remove( {
+		User.findByIdAndRemove( {
 			_id: req.params.user_id
 		}, function( err, user ) {
 			if( err ) res.send( err )

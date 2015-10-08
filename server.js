@@ -23,6 +23,7 @@ var cookieParser = require('cookie-parser')
 var path = require('path')
 var methodOverride = require('method-override')
 
+
 // Connect to database
 mongoose.connect(DB)
 
@@ -64,7 +65,7 @@ app.use(function ( req, res, next ) {
 })
 
 // create facebook request
-app.get('/auth/facebook', passport.authenticate('facebook', { scope: 'email' }))
+app.get('/auth/facebook', passport.authenticate( 'facebook', { scope: ['email', 'public_profile'] } ) )
 
 // Route handler for facebook callback strategy
 app.get('/auth/facebook/callback',

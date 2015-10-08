@@ -29,7 +29,7 @@ module.exports = function( passport ) {
         clientSecret      : process.env.FACEBOOK_API_SECRET,
         callbackURL       : 'http://localhost:3000/auth/facebook/callback',
         enableProof       : true,
-        profileFields     : [ 'id', 'name', 'email', 'picture' ]
+        profileFields     : [ 'id', 'name', 'email', 'photos' ]
     }, function( access_token, refresh_token, profile, done ) {
     // Use this to see the information returned from Facebook
 
@@ -41,13 +41,14 @@ module.exports = function( passport ) {
                 } 
                 if (!user){  
                     var newUser             = new User()
+                    console.log( profile )
                     newUser.fb.id           = profile.id
                     newUser.fb.access_token = access_token
                     newUser.fb.firstName    = profile.name.givenName
                     newUser.fb.lastName     = profile.name.familyName
                     newUser.fb.email        = profile.emails[0].value
-                    newUser.fb.picture		= 'https://graph.facebook.com/' + profile.id + '/picture'
-                    console.log( newUser.fb.picture )
+                    newUser.fb.photos		= 'https://graph.facebook.com/' + profile.id + '/picture'
+                    console.log( newUser.fb.photos )
                     newUser.save(function( err , user ) {
                         if ( err ) {
                                 throw err
