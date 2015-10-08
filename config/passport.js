@@ -1,9 +1,9 @@
 //===========================
 //This is our passport module
 //===========================
-var mongoose            = require( "mongoose" ),
-var User                = mongoose.model( 'User' ),
-var	FacebookStrategy    = require( 'passport-facebook' ).Strategy,
+var mongoose            = require( "mongoose" )
+var User                = mongoose.model( 'User' )
+var	FacebookStrategy    = require( 'passport-facebook' ).Strategy
 var Strategy            = require( 'passport-http-bearer').Strategy
 var express             = require('express')
 var app                 = express()
@@ -46,7 +46,16 @@ passport.use(
         }
     )
 )
-
+// Configure Express application.
+app.use(require('morgan')('combined'));
+//route to require token
+app.get(  
+    '/profile',
+    passport.authenticate('bearer', { session: false }),
+    function(req, res) {
+        res.send('LOGGED IN as ' + req.user.facebookId + ' - <a href=\"/logout\">Log out</a>')
+    }
+)
 //===========
 //FACEBOOOK
 //===========
