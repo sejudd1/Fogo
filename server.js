@@ -83,7 +83,13 @@ app.get( '/auth/facebook/callback',
     successRedirect: '/',
     failureRedirect: '/'
   } )
-)
+),
+//-----------
+//Server after successredirect 
+//adds token on success redirect
+function( req, res ) {
+        res.redirect('/profile?access_token=' + req.user.access_token)
+    }
 
 //Log the user out
 app.get( '/logout', function ( req, res ) {

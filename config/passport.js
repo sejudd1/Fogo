@@ -2,9 +2,11 @@
 //This is our passport module
 //===========================
 var mongoose            = require( "mongoose" ),
-    User                = mongoose.model( 'User' ),
-	FacebookStrategy    = require( 'passport-facebook' ).Strategy,
-    LocalStrategy       = require( 'passport-local' ).Strategy
+var User                = mongoose.model( 'User' ),
+var	FacebookStrategy    = require( 'passport-facebook' ).Strategy,
+var Strategy            = require( 'passport-http-bearer').Strategy
+var express             = require('express')
+var app                 = express()
 
 module.exports.delete = function() {
     User.find
@@ -25,6 +27,25 @@ module.exports = function( passport ) {
 		} )
 
 	} )
+//Authentication using token
+passport.use(  
+    new Strategy(
+        function(token, done) {
+            User.findOne({ access_token: token },
+                function(err, user) {
+                    if(err) {
+                        return done(err)
+                    }
+                    if(!user) {
+                        return done(null, false)
+                    }
+
+                    return done(null, user, { scope: 'all' })
+                }
+            );
+        }
+    )
+)
 
 //===========
 //FACEBOOOK
