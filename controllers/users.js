@@ -35,16 +35,20 @@ var User = require( '../models/user.js' )
 				} else {
 					res.send( err )
 				}
+			}else{
+				res.json( { success: true, message: 'Account created, Lets FOGO!' } )
 			}
-			res.json( { success: true, message: 'Account created, Lets FOGO!' } )
 		} )
 	}
 
 	function show( req, res ) {
 		//get a single user -- show
 		User.findById(req.params.user_id, function( err, user ) {
-			if( err ) res.send( err )
-			res.json( user )
+			if( err ){
+				res.send( err )
+			} else {
+				res.json( user )
+			}
 		} )
 	}
 
@@ -59,7 +63,8 @@ var User = require( '../models/user.js' )
 
 			user.save(function( err ) {
 				if( err ) res.send( err )
-				res.json( { success: true, message: 'Your FOGO account has been updated!' } )
+				}else {
+					res.json( { success: true, message: 'Your FOGO account has been updated!' } )
 			} )
 		} )
 	}
@@ -70,7 +75,8 @@ var User = require( '../models/user.js' )
 			_id: req.params.user_id
 		}, function( err, user ) {
 			if( err ) res.send( err )
-			res.json( { success: true, message: 'Your FOGO account has been Deleted' } )
+			}else{
+				res.json( { success: true, message: 'Your FOGO account has been Deleted' } )
 		} )
 	}
 

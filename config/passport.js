@@ -47,7 +47,7 @@ module.exports = function( passport ) {
                     newUser.fb.firstName    = profile.name.givenName
                     newUser.fb.lastName     = profile.name.familyName
                     newUser.fb.email        = profile.emails[0].value
-                    newUser.fb.photos		= 'https://graph.facebook.com/' + profile.id + '/picture'
+                    newUser.fb.photos		= 'graph.facebook.com' + profile.id + '/picture'
                     console.log( newUser.fb.photos )
                     newUser.save(function( err , user ) {
                         if ( err ) {

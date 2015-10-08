@@ -1,0 +1,26 @@
+<h1>Broadcast Your Topic</h1>
+<div class='container'>
+
+	<% for( var i = 0; i < convo.length; i++ ) {  %>
+	
+	<ul>
+
+	  <li> <%= convo[ i ].owner %> </li>
+
+	  <li> <%= convo[ i ].group %> </li>
+
+	  <li> 	
+
+	  		<% for( var i = 0; i < topic.length; i++ ) { %>
+	  		<%= convo[ i ].topic %>
+	  		<% } %>
+
+	  </li>
+
+	  <li> <%= convo[ i ].location %> </li>
+
+	</ul>
+
+<% } %>
+
+</div>
