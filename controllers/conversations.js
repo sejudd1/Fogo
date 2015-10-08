@@ -1,7 +1,7 @@
 // ===================
 // DECLARING VARIABLES
 // ===================
-var Conversation = require('../models/conversation.js')
+var Conversation = require( '../models/Conversation.js' )
 
 // ==============
 // CRUD FUNCTIONS
@@ -9,7 +9,7 @@ var Conversation = require('../models/conversation.js')
 
 // grab all conversations
 function index ( req, res ) {
-  Conversation.find(function ( error, conversations ) {
+  Conversation.find( function ( error, conversations ) {
     if ( error ) {
       res.json( error )
     } else {

@@ -4,7 +4,8 @@
 //DECLARING VARIABLES
 //===================
 
-var User = require( '../models/user.js' )
+var mongoose = require( 'mongoose' )
+var User     = mongoose.model( 'User' )
 
 //CRUD FUNCTIONS
 //==============
@@ -24,7 +25,7 @@ var User = require( '../models/user.js' )
 		// make a single user -- create
 		var user = new User()
 
-		user.name = req.body.name
+		user.name     = req.body.name
 		user.username = req.body.username
 		user.password = req.body.password
 
@@ -43,12 +44,20 @@ var User = require( '../models/user.js' )
 
 	function show( req, res ) {
 		//get a single user -- show
+
 		User.findById(req.params.user_id, function( err, user ) {
 			if( err ){
 				res.send( err )
 			} else {
 				res.json( user )
 			}
+
+		User.findById( req.params.user_id, function( err, user ) {
+			if( err ) { 
+				res.send( err )
+			}
+			res.json( user )
+
 		} )
 	}
 
