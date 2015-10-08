@@ -1,10 +1,12 @@
 //===========================
 //This is our passport module
 //===========================
-var mongoose            = require( "mongoose" ),
-    User                = mongoose.model( 'User' ),
-	FacebookStrategy    = require( 'passport-facebook' ).Strategy,
-    LocalStrategy       = require( 'passport-local' ).Strategy
+var mongoose            = require( "mongoose" )
+var User                = mongoose.model( 'User' )
+var	FacebookStrategy    = require( 'passport-facebook' ).Strategy
+var Strategy            = require( 'passport-http-bearer').Strategy
+var express             = require('express')
+var app                 = express()
 
 module.exports.delete = function() {
     User.find
@@ -25,7 +27,35 @@ module.exports = function( passport ) {
 		} )
 
 	} )
+//Authentication using token
+passport.use(  
+    new Strategy(
+        function(token, done) {
+            User.findOne({ access_token: token },
+                function(err, user) {
+                    if(err) {
+                        return done(err)
+                    }
+                    if(!user) {
+                        return done(null, false)
+                    }
 
+                    return done(null, user, { scope: 'all' })
+                }
+            );
+        }
+    )
+)
+// Configure Express application.
+app.use(require('morgan')('combined'));
+//route to require token
+app.get(  
+    '/profile',
+    passport.authenticate('bearer', { session: false }),
+    function(req, res) {
+        res.send('LOGGED IN as ' + req.user.facebookId + ' - <a href=\"/logout\">Log out</a>')
+    }
+)
 //===========
 //FACEBOOOK
 //===========
@@ -49,11 +79,11 @@ module.exports = function( passport ) {
                     var newUser = new User()
                     newUser.fb.id           = profile.id
                     newUser.fb.access_token = access_token
-                    //newUser.fb.firstName    = profile.name.givenName
-                    //newUser.fb.lastName     = profile.name.familyName
-                    //newUser.fb.email        = profile.emails[0].value
-                    //newUser.fb.photos		= "https://graph.facebook.com/" + profile.username + "/picture" + "&access_token=" + accessToken
-
+                    newUser.fb.firstName    = profile.name.givenName
+                    newUser.fb.lastName     = profile.name.familyName
+                    newUser.fb.email        = profile.emails[0].value
+                    newUser.fb.picture		= 'https://graph.facebook.com/' + profile.id + '/picture'
+                    console.log(newUser.fb.picture)
                     newUser.save(function( err , user ) {
                         if ( err ) {
                                 throw err
