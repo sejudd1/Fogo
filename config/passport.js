@@ -1,9 +1,14 @@
 //===========================
 //This is our passport module
 //===========================
-var User                = require( '../models/User' )
-	FacebookStrategy    = require( 'passport-facebook' ).Strategy
+var mongoose            = require( "mongoose" ),
+    User                = mongoose.model( 'User' ),
+	FacebookStrategy    = require( 'passport-facebook' ).Strategy,
     LocalStrategy       = require( 'passport-local' ).Strategy
+
+module.exports.delete = function() {
+    User.find
+}
 
 module.exports = function( passport ) {
 	//Get user id to store for session
@@ -28,7 +33,6 @@ module.exports = function( passport ) {
         clientID          : process.env.FACEBOOK_API_KEY,
         clientSecret      : process.env.FACEBOOK_API_SECRET,
         callbackURL       : 'http://localhost:3000/auth/facebook/callback',
-        //passReqToCallback : true,
         enableProof       : true,
         profileFields     : [ 'id', 'name', 'email', 'picture' ]
     }, function( access_token, refresh_token, profile, done ) {
