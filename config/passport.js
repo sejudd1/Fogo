@@ -82,13 +82,8 @@ app.get(
                     newUser.fb.firstName    = profile.name.givenName
                     newUser.fb.lastName     = profile.name.familyName
                     newUser.fb.email        = profile.emails[0].value
-<<<<<<< HEAD
                     newUser.fb.photos		= profile.picture
                     console.log( newUser.fb.photos )
-=======
-                    newUser.fb.picture		= 'https://graph.facebook.com/' + profile.id + '/picture'
-                    console.log(newUser.fb.picture)
->>>>>>> 1782c41dd4eece3f85992610b58659cd4a6b7e09
                     newUser.save(function( err , user ) {
                         if ( err ) {
                                 throw err

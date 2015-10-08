@@ -22,11 +22,7 @@
     "cookie-parser": "^1.4.0",
     "express": "^4.13.3",
     "express-session": "^1.11.3",
-<<<<<<< HEAD
-    "method-override": "^2.0.2",
-=======
     "method-override": "~2.0.2",
->>>>>>> 1782c41dd4eece3f85992610b58659cd4a6b7e09
     "mongoose": "^4.1.9",
     "morgan": "^1.6.1",
     "passport": "^0.3.0",
