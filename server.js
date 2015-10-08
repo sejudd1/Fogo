@@ -26,13 +26,6 @@ var methodOverride      = require( 'method-override' )
 // Connect to database
 mongoose.connect( DB )
 
-// express Session and Passport Session
-app.use( expressSession( {
-  secret: 'mySecretKey',
-  resave: true,
-  saveUninitialized: true
-} ) )
-
 app.use( passport.initialize() )
 app.use( passport.session() )
 
