@@ -80,16 +80,18 @@ app.get( '/auth/facebook', passport.authenticate( 'facebook', { scope: 'email' }
 app.get( '/auth/facebook/callback',
   // Tell passport what to do on success and failure
   passport.authenticate( 'facebook', {
-    successRedirect: '/',
+    successRedirect: '/grantAccess',
     failureRedirect: '/'
   } )
 ),
 //-----------
 //Server after successredirect 
 //adds token on success redirect
-function( req, res ) {
-        res.redirect('/profile?access_token=' + req.user.access_token)
-    }
+app.get( '/grantAccess', function( req, res ) {
+        console.log( "We upm in here")
+        console.log( req.user )
+        res.redirect('/profile?access_token=' + req.user.fb.access_token)
+    } )
 
 //Log the user out
 app.get( '/logout', function ( req, res ) {
