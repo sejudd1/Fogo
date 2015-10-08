@@ -12,6 +12,9 @@ module.exports = function ( app, passport ) {
     })
   })
 
+  //Grab FB Profile Pic
+  app.get()
+
   // Logout
   app.get('/logout', function ( req, res ) {
     req.logout()

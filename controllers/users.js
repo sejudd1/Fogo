@@ -44,21 +44,14 @@ var User     = mongoose.model( 'User' )
 
 	function show( req, res ) {
 		//get a single user -- show
-
-		User.findById(req.params.user_id, function( err, user ) {
-			if( err ){
-				res.send( err )
-			} else {
-				res.json( user )
-			}
-
 		User.findById( req.params.user_id, function( err, user ) {
 			if( err ) { 
 				res.send( err )
+			}else{
+				res.json( user )
 			}
-			res.json( user )
 
-		} )
+		} ) 
 	}
 
 	function update( req, res ) {
@@ -71,9 +64,11 @@ var User     = mongoose.model( 'User' )
 			if( req.body.password ) user.password = req.body.password
 
 			user.save(function( err ) {
-				if( err ) res.send( err )
+				if( err ) {
+					res.send( err )
 				}else {
 					res.json( { success: true, message: 'Your FOGO account has been updated!' } )
+				}
 			} )
 		} )
 	}
@@ -83,9 +78,11 @@ var User     = mongoose.model( 'User' )
 		User.findByIdAndRemove( {
 			_id: req.params.user_id
 		}, function( err, user ) {
-			if( err ) res.send( err )
+			if( err ) {
+				res.send( err )
 			}else{
 				res.json( { success: true, message: 'Your FOGO account has been Deleted' } )
+			}
 		} )
 	}
 
