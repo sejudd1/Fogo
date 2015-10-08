@@ -9,12 +9,14 @@ function c ( word ) {
 var express             = require( 'express' )
 var app                 = express()
 var mongoose            = require( 'mongoose' )
+var User                = require( './models/User.js' )
 var logger              = require( 'morgan' )
 var bodyParser          = require( 'body-parser' )
-var port                = process.env.PORT || 3000
+var port                = process.env.PORT         || 3000
 var DB                  = process.env.DATABASE_URL || 'mongodb://localhost:27017/fogo'
 var Conversation        = require( './models/Conversation.js' )
 var conversationsRouter = require( './config/routes/conversationRoutes.js' )
+var usersRouter         = require( './config/routes/userRoutes.js' )
 var passport            = require( 'passport' )
 var expressSession      = require( 'express-session' )
 var cookieParser        = require( 'cookie-parser' )
@@ -65,6 +67,12 @@ app.use( function ( req, res, next ) {
   next()
 } )
 
+
+
+// ===================
+// ROUTES
+// ===================
+
 // create facebook request
 app.get( '/auth/facebook', passport.authenticate( 'facebook', { scope: 'email' } ) )
 
@@ -77,33 +85,17 @@ app.get( '/auth/facebook/callback',
   } )
 )
 
+//Log the user out
 app.get( '/logout', function ( req, res ) {
   req.logout()
   res.redirect( '/' )
 } )
 
-// ===================
-// ROUTES
-// ===================
-
-// test route for home
-// app.get('/', function ( req, res ) {
-//   Conversation.find(function ( error, conversations ) {
-//     if ( error ) {
-//       res.json('Error ' + error)
-//     } else {
-//       c('this works')
-//       c(req.isAuthenticated)
-//       res.json(conversations)
-
-//     }
-//   })
-// })
-
 app.get( '/map', function ( req, res ) {
   res.sendFile( __dirname + '/views/map.html')
 } )
 
+app.use( '/api', usersRouter )
 app.use( '/api', conversationsRouter )
 // pass our application into our routes
 require( './config/routes/staticRoutes' )( app ) 
