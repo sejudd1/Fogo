@@ -134,7 +134,37 @@ app.get( '/map', function ( req, res ) {
 app.use( '/api', usersRouter )
 app.use( '/api', conversationsRouter )
 // pass our application into our routes
-require( './config/routes/staticRoutes' )( app ) 
+require( './config/routes/staticRoutes' )( app )
+
+//================
+//Views
+//================
+//set the view engine to ejs
+app.set('view engines', 'ejs');
+
+//use res.render to load up an ejs view
+
+//home page
+
+<h1>FACEBOOK LOGIN</h1>  
+   <div>
+   <% if(user != undefined){ %>
+       <h2>Facebook</h2>
+       <pre>
+           <%= user.fb %>
+       </pre>
+       <a href="/logout">Logout</a>
+   <% } else { %>
+       <a href="/auth/facebook">Login with Facebook</a>
+   <% } %>
+   </div>
+
+
+
+
+
+
+
 // ===============
 // SERVER PORT
 // ==============

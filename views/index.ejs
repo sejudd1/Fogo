@@ -1,0 +1,13 @@
+
+<h1>FACEBOOK LOGIN</h1>  
+   <div>
+   <% if(user != undefined){ %>
+       <h2>Facebook</h2>
+       <pre>
+           <%= user.fb %>
+       </pre>
+       <a href="/logout">Logout</a>
+   <% } else { %>
+       <a href="/auth/facebook">Login with Facebook</a>
+   <% } %>
+   </div>
