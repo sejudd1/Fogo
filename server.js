@@ -144,20 +144,35 @@ app.set('view engines', 'ejs');
 
 //use res.render to load up an ejs view
 
-//home page
+//broadcast page
+app.get('/map', function(req, res){
+  res.render('pages/broadcast')
+})
 
-<h1>FACEBOOK LOGIN</h1>  
-   <div>
-   <% if(user != undefined){ %>
-       <h2>Facebook</h2>
-       <pre>
-           <%= user.fb %>
-       </pre>
-       <a href="/logout">Logout</a>
-   <% } else { %>
-       <a href="/auth/facebook">Login with Facebook</a>
-   <% } %>
-   </div>
+//index page
+app.get('/', function(req, res){
+  res.render('pages/index');
+})
+
+//layout page
+app.get('/map', function(req, res){
+  res.render('pages/layout')
+})
+
+//map page
+app.get('/map', function(req, res){
+  res.render('pages/map')
+})
+
+//profile page
+app.get('/profile', function(req, res){
+  res.render('pages/profile')
+})
+
+//startConvoForm page
+app.get('/map', function(req, res){
+  res.render('pages/startConvoForm')
+})
 
 
 
